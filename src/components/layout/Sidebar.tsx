@@ -37,13 +37,8 @@ interface SidebarGroupProps {
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', category: 'main', path: '/' },
-  { icon: BarChart3, label: 'Analytics', category: 'main', path: '/analytics' },
-  { icon: FileText, label: 'Documents', category: 'main', path: '/documents' },
-  { icon: Calendar, label: 'Calendar', category: 'tools', path: '/calendar' },
-  { icon: Mail, label: 'Messages', category: 'tools', path: '/messages' },
   { icon: User, label: 'User', category: 'setting', path: '/user' },
   { icon: Shield, label: 'System', category: 'setting', path: '/system' },
-  { icon: HelpCircle, label: 'Help', category: 'setting', path: '/help' },
 ];
 
 const mainItems = menuItems.filter(item => item.category === 'main');
@@ -102,7 +97,6 @@ export function Sidebar({ collapsed, onCollapse, isMobile }: SidebarProps) {
   };
 
   const renderMenuItem = (item: typeof menuItems[0]) => {
-    // Determine if this item is active based on current location
     const isActive = location.pathname === item.path || 
                     (item.path === '/' && location.pathname === '/');
 

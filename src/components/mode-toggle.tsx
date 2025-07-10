@@ -17,7 +17,7 @@ export function ModeToggle() {
   if (!mounted) {
     return (
       <Button
-        variant='outline'
+        variant='ghost'
         size='icon'
         className='relative'
       >
@@ -29,7 +29,7 @@ export function ModeToggle() {
 
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size='icon'
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       className='relative'

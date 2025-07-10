@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 import { ModeToggle } from '@/components/mode-toggle';
 
 interface NavbarProps {
@@ -32,7 +33,7 @@ export function Navbar({ sidebarCollapsed, isMobile, onMenuClick }: NavbarProps)
         {/* Mobile Menu Button */}
         {isMobile && (
           <Button 
-            variant="outline" 
+            variant="ghost" 
             size="icon" 
             onClick={onMenuClick}
             className="mr-2 flex-shrink-0"
@@ -54,18 +55,19 @@ export function Navbar({ sidebarCollapsed, isMobile, onMenuClick }: NavbarProps)
         </div>
 
         {/* Right Side Actions */}
-        <div className="flex items-center space-x-1 md:space-x-4 flex-shrink-0">
+        <div className="flex items-center space-x-1 md:space-x-2 flex-shrink-0">
           {/* Theme Toggle */}
           <ModeToggle />
+          
+          {/* Separator */}
+          <Separator orientation="vertical" className="h-6" />
           
           {/* Notifications */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon" className="relative">
+              <Button variant="ghost" size="icon" className="relative">
                 <Bell className="h-5 w-5" />
-                <Badge className="absolute -top-1 -right-1 bg-rose-600 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center p-0 tẽ">
-                  3
-                </Badge>
+               
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-80">
@@ -95,7 +97,7 @@ export function Navbar({ sidebarCollapsed, isMobile, onMenuClick }: NavbarProps)
           {/* User Profile */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon" className="relative rounded-full">
+              <Button variant="ghost" size="icon" className="relative rounded-full">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="/api/placeholder/32/32" alt="User" />
                   <AvatarFallback className="text-xs">JD</AvatarFallback>
