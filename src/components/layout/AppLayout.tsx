@@ -1,5 +1,6 @@
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Navbar } from '@/components/layout/NavBar';
+import { Breadcrumb, useBreadcrumb } from '@/components/ui/breadcrumb';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -8,6 +9,7 @@ const AppLayout: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const isMobile = useIsMobile();
   const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const breadcrumbItems = useBreadcrumb();
 
   // Auto-collapse sidebar when switching to mobile for the first time
   useEffect(() => {
@@ -78,7 +80,11 @@ const AppLayout: React.FC = () => {
               : 'ml-48'
         }`}
       >
-        <div className="p-3 md:p-6">
+        <div className="p-4 ml-2">
+          <div className="mb-4">
+            <Breadcrumb items={breadcrumbItems} />
+          </div>
+          
           <Outlet />
         </div>
       </main>

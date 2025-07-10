@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   BarChart3, 
@@ -35,18 +36,17 @@ interface SidebarGroupProps {
 }
 
 const menuItems = [
-  { icon: LayoutDashboard, label: 'Dashboard', active: true, category: 'main' },
-  { icon: BarChart3, label: 'Analytics', active: false, category: 'main' },
-  { icon: FileText, label: 'Documents', active: false, category: 'main' },
-  { icon: Calendar, label: 'Calendar', active: false, category: 'tools' },
-  { icon: Mail, label: 'Messages', active: false, category: 'tools' },
-  { icon: User, label: 'User', active: false, category: 'setting' },
-  { icon: Shield, label: 'System', active: false, category: 'setting' },
-  { icon: HelpCircle, label: 'Help', active: false, category: 'setting' },
+  { icon: LayoutDashboard, label: 'Dashboard', category: 'main', path: '/' },
+  { icon: BarChart3, label: 'Analytics', category: 'main', path: '/analytics' },
+  { icon: FileText, label: 'Documents', category: 'main', path: '/documents' },
+  { icon: Calendar, label: 'Calendar', category: 'tools', path: '/calendar' },
+  { icon: Mail, label: 'Messages', category: 'tools', path: '/messages' },
+  { icon: User, label: 'User', category: 'setting', path: '/user' },
+  { icon: Shield, label: 'System', category: 'setting', path: '/system' },
+  { icon: HelpCircle, label: 'Help', category: 'setting', path: '/help' },
 ];
 
 const mainItems = menuItems.filter(item => item.category === 'main');
-const toolItems = menuItems.filter(item => item.category === 'tools');
 const settingItems = menuItems.filter(item => item.category === 'setting');
 
 function SidebarGroup({ title, items, collapsed, isMobile, renderMenuItem }: SidebarGroupProps) {
@@ -59,7 +59,7 @@ function SidebarGroup({ title, items, collapsed, isMobile, renderMenuItem }: Sid
   };
 
   return (
-    <div className="px-3 space-y-1">
+    <div className="px-2">
       {!collapsed && (
         <Button
           variant="ghost"
@@ -84,7 +84,7 @@ function SidebarGroup({ title, items, collapsed, isMobile, renderMenuItem }: Sid
         "overflow-hidden transition-all duration-200 ease-out",
         isExpanded || collapsed ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
       )}>
-        <div className="space-y-1">
+        <div className="space-y-2">
           {items.map(renderMenuItem)}
         </div>
       </div>
@@ -94,24 +94,35 @@ function SidebarGroup({ title, items, collapsed, isMobile, renderMenuItem }: Sid
 
 export function Sidebar({ collapsed, onCollapse, isMobile }: SidebarProps) {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleMenuItemClick = (path: string) => {
+    navigate(path);
+  };
 
   const renderMenuItem = (item: typeof menuItems[0]) => {
+    // Determine if this item is active based on current location
+    const isActive = location.pathname === item.path || 
+                    (item.path === '/' && location.pathname === '/');
+
     const menuButton = (
       <Button
         key={item.label}
-        variant={item.active ? "default" : "ghost"}
+        variant={isActive ? "default" : "ghost"}
         size={collapsed ? "icon" : "sm"}
         className={cn(
           "w-full group relative will-change-transform",
           "transition-all duration-100 ease-out",
-          collapsed ? "h-10 px-0" : "justify-start h-10 px-3",
-          item.active 
+          collapsed ? "h-8 px-0" : "justify-start h-8 px-3",
+          isActive 
             ? "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90" 
             : "hover:bg-accent hover:text-accent-foreground",
           !collapsed && "text-sm font-medium"
         )}
         onMouseEnter={() => setHoveredItem(item.label)}
         onMouseLeave={() => setHoveredItem(null)}
+        onClick={() => handleMenuItemClick(item.path)}
       >
         <item.icon className={cn(
           "h-4 w-4 flex-shrink-0",
@@ -190,22 +201,11 @@ export function Sidebar({ collapsed, onCollapse, isMobile }: SidebarProps) {
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 overflow-hidden py-4 space-y-4">
+      <div className="flex-1 overflow-hidden py-4 space-y-2">
         {/* Main Navigation Group */}
         <SidebarGroup
           title="Main"
           items={mainItems}
-          collapsed={collapsed}
-          isMobile={isMobile}
-          renderMenuItem={renderMenuItem}
-        />
-
-        <Separator className="mx-3" />
-
-        {/* Tools Group */}
-        <SidebarGroup
-          title="Tools"
-          items={toolItems}
           collapsed={collapsed}
           isMobile={isMobile}
           renderMenuItem={renderMenuItem}
