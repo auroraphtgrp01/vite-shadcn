@@ -2,19 +2,13 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
-  BarChart3, 
   User,
-  Settings, 
-  FileText, 
-  Calendar,
-  Mail,
-  HelpCircle,
-  PanelLeftClose,
   PanelLeft,
   LogOut,
   Shield,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  PanelLeftClose
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';

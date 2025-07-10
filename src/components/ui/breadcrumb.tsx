@@ -65,18 +65,10 @@ export function useBreadcrumb() {
       currentPath += `/${segment}`;
       const isLast = index === pathSegments.length - 1;
       
-      // Tạo label từ segment với các mapping phổ biến
       const labelMappings: Record<string, string> = {
-        'dashboard': 'Bảng điều khiển',
-        'analytics': 'Phân tích',
-        'documents': 'Tài liệu',
-        'calendar': 'Lịch',
-        'messages': 'Tin nhắn',
-        'user': 'Người dùng',
-        'system': 'Hệ thống',
-        'help': 'Trợ giúp',
-        'settings': 'Cài đặt',
-        'login': 'Đăng nhập'
+        'dashboard': 'Dashboard',
+        'user': 'User',
+        'system': 'System',
       };
       
       const label = labelMappings[segment.toLowerCase()] || 
