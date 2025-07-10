@@ -20,6 +20,7 @@ import { cn } from '@/lib/utils';
 interface SidebarProps {
   collapsed: boolean;
   onCollapse: (collapsed: boolean) => void;
+  isMobile: boolean;
 }
 
 const menuItems = [
@@ -37,7 +38,7 @@ const mainItems = menuItems.filter(item => item.category === 'main');
 const toolItems = menuItems.filter(item => item.category === 'tools');
 const systemItems = menuItems.filter(item => item.category === 'system');
 
-export function Sidebar({ collapsed, onCollapse }: SidebarProps) {
+export function Sidebar({ collapsed, onCollapse, isMobile }: SidebarProps) {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   const renderMenuItem = (item: typeof menuItems[0]) => {
@@ -47,7 +48,8 @@ export function Sidebar({ collapsed, onCollapse }: SidebarProps) {
         variant={item.active ? "default" : "ghost"}
         size={collapsed ? "icon" : "sm"}
         className={cn(
-          "w-full transition-all duration-200 group relative",
+          "w-full group relative will-change-transform",
+          "transition-all duration-100 ease-out",
           collapsed ? "h-10 px-0" : "justify-start h-10 px-3",
           item.active 
             ? "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90" 
@@ -66,15 +68,15 @@ export function Sidebar({ collapsed, onCollapse }: SidebarProps) {
         )}
         
         {/* Tooltip for collapsed state */}
-        {collapsed && hoveredItem === item.label && (
-          <div className="absolute left-full ml-3 px-3 py-2 bg-popover text-popover-foreground text-sm rounded-md whitespace-nowrap z-50 shadow-md border border-border animate-in fade-in-0 zoom-in-95">
+        {collapsed && hoveredItem === item.label && !isMobile && (
+          <div className="absolute left-full ml-3 px-3 py-2 bg-popover text-popover-foreground text-sm rounded-md whitespace-nowrap z-50 shadow-md border border-border animate-in fade-in-0 zoom-in-95 duration-150">
             {item.label}
           </div>
         )}
       </Button>
     );
 
-    if (collapsed) {
+    if (collapsed && !isMobile) {
       return (
         <TooltipProvider key={item.label}>
           <Tooltip>
@@ -94,11 +96,18 @@ export function Sidebar({ collapsed, onCollapse }: SidebarProps) {
 
   return (
     <div className={cn(
-      "fixed left-0 top-0 z-50 h-full bg-card border-r border-border transition-all duration-300 ease-in-out flex flex-col",
-      collapsed ? "w-16" : "w-64"
+      "fixed left-0 top-0 h-full bg-card border-r border-border flex flex-col will-change-transform",
+      "transition-all duration-150 ease-out",
+      isMobile 
+        ? collapsed 
+          ? "-translate-x-full opacity-0 pointer-events-none w-64 z-50" 
+          : "translate-x-0 opacity-100 w-64 z-50"
+        : collapsed 
+          ? "w-16 z-30" 
+          : "w-48 z-30"
     )}>
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-border bg-card/50">
+      <div className="flex items-center justify-between px-4 h-16 border-b border-border bg-card/50">
         {!collapsed && (
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-sm">
@@ -111,21 +120,23 @@ export function Sidebar({ collapsed, onCollapse }: SidebarProps) {
           </div>
         )}
         
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => onCollapse(!collapsed)}
-          className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-        >
-          {collapsed ? 
-            <PanelLeft className="h-4 w-4" /> : 
-            <PanelLeftClose className="h-4 w-4" />
-          }
-        </Button>
+        {!isMobile && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => onCollapse(!collapsed)}
+            className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors duration-100 ease-out"
+          >
+            {collapsed ? 
+              <PanelLeft className="h-4 w-4" /> : 
+              <PanelLeftClose className="h-4 w-4" />
+            }
+          </Button>
+        )}
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 overflow-y-auto py-4">
+      <div className="flex-1 overflow-hidden py-4">
         {/* Main Navigation */}
         <div className="px-3 space-y-1">
           {!collapsed && (
@@ -190,7 +201,7 @@ export function Sidebar({ collapsed, onCollapse }: SidebarProps) {
           )}
         </div>
         
-        {collapsed && (
+        {collapsed && !isMobile && (
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -207,6 +218,16 @@ export function Sidebar({ collapsed, onCollapse }: SidebarProps) {
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
+        )}
+        
+        {collapsed && isMobile && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="w-full h-8 mt-2 text-muted-foreground hover:text-foreground hover:bg-accent"
+          >
+            <LogOut className="h-4 w-4" />
+          </Button>
         )}
       </div>
     </div>
