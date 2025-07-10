@@ -163,6 +163,12 @@ body {
   letter-spacing: var(--tracking-normal);
 }
 
+/* Custom dialog width override */
+.dialog-content-wide {
+  width: 90vw !important;
+  max-width: 90vw !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
