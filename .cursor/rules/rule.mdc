@@ -1,0 +1,145 @@
+---
+alwaysApply: true
+---
+
+# Frontend Project Development Rules
+
+## 1. Technologies and Libraries
+
+- **Framework**: Use React with Vite as the build tool
+- **UI Component**: Use shadcn/ui as the primary UI component library
+- **Icon**: Use only Lucid Icon for all icons in the project. Do not use third-party icon libraries
+- **State Management/Data Fetching**: Use TanStack Query for managing asynchronous data (API calls, caching, etc.)
+
+## 2. Color Rules
+
+Always use color variables defined in Tailwind CSS from shadcn/ui:
+
+### Background Colors
+
+- `bg-background`
+- `bg-muted`
+- `bg-card`
+
+### Primary Colors
+
+- `bg-primary`
+- `text-primary`
+- `border-primary`
+
+### Secondary Colors
+
+- `bg-secondary`
+- `text-secondary`
+
+### Accent Colors
+
+- `bg-accent`
+- `text-accent`
+
+### ⚠️ Color Restrictions
+
+- **Do not** use hard-coded colors like `#ffffff`, `rgb(0,0,0)`, etc. in the codebase
+- **Prohibit** the use of color gradients in any case to ensure consistency and simplicity
+- Ensure adherence to color variables for consistency and ease of theme switching (if needed)
+
+## 3. Icon Rules
+
+- Use **only Lucid Icon** for all icons in the interface
+- Adjust icon sizes based on context:
+  - `w-4 h-4` for inline text
+  - `w-6 h-6` for buttons
+- Icon colors must follow Tailwind CSS variables from shadcn/ui:
+  - `text-primary`
+  - `text-muted-foreground`
+- Ensure icons are meaningful and avoid overuse or unnecessary icons
+
+## 4. UI Design Rules
+
+### Design Principles
+
+- **Elegant**: The interface must be clean, avoiding excessive effects or cluttered details
+- **Creative**: Combine UI elements (buttons, cards, badges, etc.) uniquely while maintaining consistency
+- **Balanced**: Ensure harmonious spacing, sizing, and proportions between elements. Use Tailwind CSS spacing values (`p-4`, `m-2`, `gap-4`)
+- **Simple**: Prioritize minimalism, removing unnecessary elements to enhance user experience
+
+### Harmonious Coordination
+
+- **Colors**: Combine shadcn/ui color variables for good contrast
+  - Example: `bg-primary` with `text-primary-foreground`
+- **Icons**: Use icons for visual support, such as in buttons, badges, or menus
+- **Badges**: Use badges to highlight status or important information
+  - Example: `badge bg-success` for completed status
+
+## 5. TanStack Query Rules
+
+- Use TanStack Query to manage **all API requests** (GET, POST, PUT, DELETE, etc.)
+- Leverage TanStack Query features:
+  - Caching
+  - Refetching
+  - Optimistic updates to optimize performance
+
+### Query Keys Structure
+
+Use clear, structured query keys:
+
+```typescript
+['users', userId]
+['posts', { page, limit }]
+```
+
+### Error and Loading States
+
+Handle loading and error states visually using shadcn/ui components:
+
+- **Skeleton** for loading states
+- **Alert** for error states
+
+## 6. Code Rules
+
+### Component Structure
+
+- Each component should be **small**, **reusable**, and follow the **Single Responsibility Principle**
+
+### File Naming Conventions
+
+- **PascalCase** for component files
+  - Example: `ButtonPrimary.tsx`
+- **kebab-case** for other files
+  - Example: `api-client.ts`
+
+### Styling
+
+- Apply **Tailwind classes directly** in JSX/TSX
+- Avoid separate CSS unless absolutely necessary
+
+### TypeScript
+
+- **Mandatorily use TypeScript** for type safety
+- Define interfaces/types for:
+  - Props
+  - State
+  - API responses
+
+### Code Quality
+
+- Use **Prettier** and **ESLint** to ensure consistent code formatting
+- **File Preservation**: Do not delete or rewrite existing files without team approval or a clear review process
+
+## 7. Language and Commit Rules
+
+### Communication Language
+
+- Use **Vietnamese** for all project-related discussions and documentation
+- **Exception**: Commit messages must be in English
+
+### Commit Message Standards
+
+Use English following standard conventions:
+
+```bash
+feat: add login functionality
+fix: resolve button alignment issue  
+chore: update dependencies
+docs: update project rules
+```

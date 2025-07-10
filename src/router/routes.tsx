@@ -6,8 +6,12 @@ import Login from '@/pages/auth/Login';
 
 export const routes: RouteObject[] = [
   {
-    path: '/auth/login',
+    path: '/login',
     element: <Login />,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
   {
     path: '/',
@@ -18,10 +22,6 @@ export const routes: RouteObject[] = [
         element: <HomePage />,
         index: true,
       },
-      {
-        path: '*',
-        element: <NotFound />,
-      }
     ]
   }
 ];
