@@ -17,11 +17,11 @@ export function ModeToggle() {
   if (!mounted) {
     return (
       <Button
-        variant='ghost'
+        variant='outline'
         size='icon'
-        className='mt-0.5 h-7 select-none rounded-full !border-0 p-0 outline-none hover:bg-transparent focus:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0'
+        className='relative'
       >
-        <Moon className='h-[1.2rem] w-[1.2rem]' />
+        <Moon className='h-5 w-5' />
         <span className='sr-only'>Chuyển đổi giao diện</span>
       </Button>
     )
@@ -29,9 +29,10 @@ export function ModeToggle() {
 
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       size='icon'
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      className='relative'
     >
       <motion.div
         key='sun-icon'
@@ -43,7 +44,7 @@ export function ModeToggle() {
         }}
         transition={{ duration: 0.3 }}
       >
-        <Sun className='h-[1.2rem] w-[1.2rem]' />
+        <Sun className='h-5 w-5' />
       </motion.div>
 
       <motion.div
@@ -57,7 +58,7 @@ export function ModeToggle() {
         transition={{ duration: 0.3 }}
         className='absolute'
       >
-        <Moon className='h-[1.2rem] w-[1.2rem]' />
+        <Moon className='h-5 w-5' />
       </motion.div>
       <span className='sr-only'>Chuyển đổi giao diện</span>
     </Button>

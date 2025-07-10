@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
+import { ModeToggle } from '@/components/mode-toggle';
 
 interface NavbarProps {
   sidebarCollapsed: boolean;
@@ -20,7 +21,7 @@ interface NavbarProps {
 
 export function Navbar({ sidebarCollapsed, isMobile, onMenuClick }: NavbarProps) {
   return (
-    <nav className={`fixed top-0 z-40 bg-background border-b border-border transition-all duration-300 ease-in-out ${
+    <nav className={`fixed top-0 z-40 bg-background border-b border-border will-change-auto transition-all duration-150 ease-out ${
       isMobile 
         ? 'left-0 w-full' 
         : sidebarCollapsed 
@@ -31,7 +32,7 @@ export function Navbar({ sidebarCollapsed, isMobile, onMenuClick }: NavbarProps)
         {/* Mobile Menu Button */}
         {isMobile && (
           <Button 
-            variant="ghost" 
+            variant="outline" 
             size="icon" 
             onClick={onMenuClick}
             className="mr-2 flex-shrink-0"
@@ -54,12 +55,15 @@ export function Navbar({ sidebarCollapsed, isMobile, onMenuClick }: NavbarProps)
 
         {/* Right Side Actions */}
         <div className="flex items-center space-x-1 md:space-x-4 flex-shrink-0">
+          {/* Theme Toggle */}
+          <ModeToggle />
+          
           {/* Notifications */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-4 w-4 md:h-5 md:w-5" />
-                <Badge className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-xs w-4 h-4 md:w-5 md:h-5 rounded-full flex items-center justify-center p-0">
+              <Button variant="outline" size="icon" className="relative">
+                <Bell className="h-5 w-5" />
+                <Badge className="absolute -top-1 -right-1 bg-rose-600 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center p-0 tẽ">
                   3
                 </Badge>
               </Button>
@@ -91,8 +95,8 @@ export function Navbar({ sidebarCollapsed, isMobile, onMenuClick }: NavbarProps)
           {/* User Profile */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <Avatar className="h-6 w-6 md:h-8 md:w-8">
+              <Button variant="outline" size="icon" className="relative rounded-full">
+                <Avatar className="h-8 w-8">
                   <AvatarImage src="/api/placeholder/32/32" alt="User" />
                   <AvatarFallback className="text-xs">JD</AvatarFallback>
                 </Avatar>
