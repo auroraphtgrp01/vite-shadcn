@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
 import { Checkbox } from "../../components/ui/checkbox";
-import { Eye, EyeOff, Github, Mail, Lock } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 
 export default function Login() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -16,25 +16,25 @@ export default function Login() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsLoading(true);
-        // Mô phỏng gọi API
+        // Simulate API call
         setTimeout(() => {
             setIsLoading(false);
-            // Chuyển hướng về trang chủ sau khi đăng nhập thành công
+            // Redirect to home page after successful login
             navigate('/');
         }, 2000);
     };
 
     return (
-        <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-violet-50 dark:from-slate-900 dark:to-slate-800 p-4">
+        <div className="min-h-screen w-full flex items-center justify-center bg-background p-4">
             <div className="w-full max-w-md">
-                <Card className="border-none shadow-xl backdrop-blur-sm bg-white/90 dark:bg-slate-900/90">
+                <Card className="border shadow-lg bg-card">
                     <CardHeader className="space-y-2 text-center pb-6">
                         <div className="mx-auto bg-primary/10 p-2 rounded-full w-12 h-12 flex items-center justify-center mb-2">
                             <Mail className="h-6 w-6 text-primary" />
                         </div>
-                        <CardTitle className="text-2xl font-bold tracking-tight">Đăng nhập</CardTitle>
+                        <CardTitle className="text-2xl font-bold tracking-tight">Sign In</CardTitle>
                         <CardDescription>
-                            Nhập thông tin đăng nhập của bạn để tiếp tục
+                            Enter your login credentials to continue
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-5">
@@ -56,7 +56,7 @@ export default function Login() {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="password" className="text-sm font-medium">Mật khẩu</Label>
+                                <Label htmlFor="password" className="text-sm font-medium">Password</Label>
                                 <div className="relative">
                                     <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                                     <Input
@@ -88,11 +88,11 @@ export default function Login() {
                                         onCheckedChange={(checked) => setRememberMe(checked as boolean)}
                                     />
                                     <Label htmlFor="remember" className="text-sm text-muted-foreground cursor-pointer">
-                                        Nhớ đăng nhập
+                                        Remember me
                                     </Label>
                                 </div>
                                 <Link to="/auth/forgot-password" className="text-sm font-medium text-primary hover:underline">
-                                    Quên mật khẩu?
+                                    Forgot password?
                                 </Link>
                             </div>
 
@@ -104,9 +104,9 @@ export default function Login() {
                                 {isLoading ? (
                                     <div className="flex items-center justify-center">
                                         <div className="animate-spin mr-2 h-4 w-4 border-2 border-background border-t-transparent rounded-full"></div>
-                                        <span>Đang đăng nhập...</span>
+                                        <span>Signing in...</span>
                                     </div>
-                                ) : "Đăng nhập"}
+                                ) : "Sign In"}
                             </Button>
                         </form>
                     </CardContent>
