@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { 
   LayoutDashboard, 
   BarChart3, 
-  Users, 
+  User,
   Settings, 
   FileText, 
   Calendar,
@@ -10,7 +10,10 @@ import {
   HelpCircle,
   PanelLeftClose,
   PanelLeft,
-  LogOut
+  LogOut,
+  Shield,
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -23,20 +26,71 @@ interface SidebarProps {
   isMobile: boolean;
 }
 
+interface SidebarGroupProps {
+  title: string;
+  items: typeof menuItems;
+  collapsed: boolean;
+  isMobile: boolean;
+  renderMenuItem: (item: typeof menuItems[0]) => React.ReactNode;
+}
+
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', active: true, category: 'main' },
   { icon: BarChart3, label: 'Analytics', active: false, category: 'main' },
-  { icon: Users, label: 'Users', active: false, category: 'main' },
   { icon: FileText, label: 'Documents', active: false, category: 'main' },
   { icon: Calendar, label: 'Calendar', active: false, category: 'tools' },
   { icon: Mail, label: 'Messages', active: false, category: 'tools' },
-  { icon: Settings, label: 'Settings', active: false, category: 'system' },
-  { icon: HelpCircle, label: 'Help', active: false, category: 'system' },
+  { icon: User, label: 'User', active: false, category: 'setting' },
+  { icon: Shield, label: 'System', active: false, category: 'setting' },
+  { icon: HelpCircle, label: 'Help', active: false, category: 'setting' },
 ];
 
 const mainItems = menuItems.filter(item => item.category === 'main');
 const toolItems = menuItems.filter(item => item.category === 'tools');
-const systemItems = menuItems.filter(item => item.category === 'system');
+const settingItems = menuItems.filter(item => item.category === 'setting');
+
+function SidebarGroup({ title, items, collapsed, isMobile, renderMenuItem }: SidebarGroupProps) {
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  const toggleExpanded = () => {
+    if (!collapsed) {
+      setIsExpanded(!isExpanded);
+    }
+  };
+
+  return (
+    <div className="px-3 space-y-1">
+      {!collapsed && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={toggleExpanded}
+          className="w-full px-3 py-2 h-auto justify-start hover:bg-accent/50 transition-colors duration-150"
+        >
+          <div className="flex items-center justify-between w-full">
+            <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              {title}
+            </h2>
+            {isExpanded ? (
+              <ChevronDown className="h-3 w-3 text-muted-foreground" />
+            ) : (
+              <ChevronRight className="h-3 w-3 text-muted-foreground" />
+            )}
+          </div>
+        </Button>
+      )}
+      
+      <div className={cn(
+        "overflow-hidden transition-all duration-200 ease-out",
+        isExpanded || collapsed ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+      )}>
+        <div className="space-y-1">
+          {items.map(renderMenuItem)}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Sidebar({ collapsed, onCollapse, isMobile }: SidebarProps) {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -136,46 +190,37 @@ export function Sidebar({ collapsed, onCollapse, isMobile }: SidebarProps) {
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 overflow-hidden py-4">
-        {/* Main Navigation */}
-        <div className="px-3 space-y-1">
-          {!collapsed && (
-            <div className="px-3 py-2">
-              <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Main
-              </h2>
-            </div>
-          )}
-          {mainItems.map(renderMenuItem)}
-        </div>
+      <div className="flex-1 overflow-hidden py-4 space-y-4">
+        {/* Main Navigation Group */}
+        <SidebarGroup
+          title="Main"
+          items={mainItems}
+          collapsed={collapsed}
+          isMobile={isMobile}
+          renderMenuItem={renderMenuItem}
+        />
 
-        <Separator className="my-4 mx-3" />
+        <Separator className="mx-3" />
 
-        {/* Tools */}
-        <div className="px-3 space-y-1">
-          {!collapsed && (
-            <div className="px-3 py-2">
-              <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                Tools
-              </h2>
-            </div>
-          )}
-          {toolItems.map(renderMenuItem)}
-        </div>
+        {/* Tools Group */}
+        <SidebarGroup
+          title="Tools"
+          items={toolItems}
+          collapsed={collapsed}
+          isMobile={isMobile}
+          renderMenuItem={renderMenuItem}
+        />
 
-        <Separator className="my-4 mx-3" />
+        <Separator className="mx-3" />
 
-        {/* System */}
-        <div className="px-3 space-y-1">
-          {!collapsed && (
-            <div className="px-3 py-2">
-              <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                System
-              </h2>
-            </div>
-          )}
-          {systemItems.map(renderMenuItem)}
-        </div>
+        {/* Setting Group */}
+        <SidebarGroup
+          title="Setting"
+          items={settingItems}
+          collapsed={collapsed}
+          isMobile={isMobile}
+          renderMenuItem={renderMenuItem}
+        />
       </div>
 
       {/* Footer */}

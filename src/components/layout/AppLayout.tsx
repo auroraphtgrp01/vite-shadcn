@@ -1,4 +1,4 @@
-import { Sidebar } from '@/components/layout/app-sidebar';
+import { Sidebar } from '@/components/layout/Sidebar';
 import { Navbar } from '@/components/layout/NavBar';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
