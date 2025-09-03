@@ -1,10 +1,8 @@
 import { RouteObject } from 'react-router-dom';
-import HomePage from '@/pages/home';
 import NotFound from '@/pages/NotFound';
 import AppLayout from '@/components/layout/AppLayout';
 import Login from '@/pages/auth/Login';
-import UserPage from '@/pages/user';
-import SystemPage from '@/pages/system';
+import HomePage from '@/pages/HomePage';
 
 export const routes: RouteObject[] = [
   {
@@ -12,28 +10,19 @@ export const routes: RouteObject[] = [
     element: <Login />,
   },
   {
-    path: '*',
-    element: <NotFound />,
-  },
-  {
     path: '/',
     element: <AppLayout />,
     children: [
       {
-        path: '',
-        element: <HomePage />,
         index: true,
+        element: <HomePage />,
       },
-      {
-        path: 'user',
-        element: <UserPage />,
-      },
-      {
-        path: 'system',
-        element: <SystemPage />,
-      },
-    ]
-  }
+    ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
 ];
 
 export default routes; 

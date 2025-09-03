@@ -1,0 +1,129 @@
+{
+  "navbar": {
+    "home": "Trang chủ",
+    "services": "Dịch vụ",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ",
+    "contactBtn": "Liên hệ",
+    "bookingBtn": "Đặt lịch"
+  },
+  "homepage": {
+    "hero": {
+      "badge": "✨ Salon nail chuyên nghiệp",
+      "title": "Làm đẹp móng tay",
+      "titleHighlight": "chuyên nghiệp",
+      "description": "Trải nghiệm dịch vụ nail cao cấp với đội ngũ thợ nail chuyên nghiệp. Từ nail art sáng tạo đến chăm sóc móng toàn diện.",
+      "bookingBtn": "Đặt lịch ngay",
+      "contactBtn": "Liên hệ",
+      "rating": "4.9/5 (200+ đánh giá)",
+      "customers": "500+ khách hàng",
+      "quickBooking": {
+        "title": "Đặt lịch nhanh",
+        "subtitle": "Chọn dịch vụ và thời gian phù hợp",
+        "selectDate": "Chọn ngày",
+        "selectTime": "Chọn giờ",
+        "bookNow": "Đặt lịch ngay"
+      }
+    },
+    "services": {
+      "badge": "Dịch vụ của chúng tôi",
+      "title": "Dịch vụ nail chuyên nghiệp",
+      "description": "Từ nail art sáng tạo đến chăm sóc móng toàn diện, chúng tôi mang đến những dịch vụ tốt nhất cho bạn",
+      "nailArt": {
+        "title": "Nail Art",
+        "description": "Thiết kế nail art độc đáo, sáng tạo theo phong cách hiện đại",
+        "price": "200.000đ",
+        "duration": "60 phút"
+      },
+      "gelNail": {
+        "title": "Gel Nail",
+        "description": "Làm gel nail bền đẹp, không bong tróc trong thời gian dài",
+        "price": "300.000đ",
+        "duration": "90 phút"
+      },
+      "nailCare": {
+        "title": "Chăm sóc móng",
+        "description": "Dịch vụ chăm sóc móng chuyên nghiệp, an toàn và hiệu quả",
+        "price": "150.000đ",
+        "duration": "45 phút"
+      },
+      "nailSpa": {
+        "title": "Spa móng",
+        "description": "Trải nghiệm spa móng cao cấp với massage thư giãn",
+        "price": "400.000đ",
+        "duration": "120 phút"
+      },
+      "price": "Giá:",
+      "duration": "Thời gian:",
+      "bookBtn": "Đặt lịch"
+    },
+    "features": {
+      "badge": "Tại sao chọn chúng tôi",
+      "title": "Cam kết chất lượng dịch vụ",
+      "safety": {
+        "title": "An toàn tuyệt đối",
+        "description": "Sử dụng dụng cụ đã được khử trùng, đảm bảo an toàn cho khách hàng"
+      },
+      "timeSaving": {
+        "title": "Tiết kiệm thời gian",
+        "description": "Đặt lịch online, không cần chờ đợi, tiết kiệm thời gian quý báu"
+      },
+      "professional": {
+        "title": "Thợ nail chuyên nghiệp",
+        "description": "Đội ngũ thợ nail giàu kinh nghiệm, được đào tạo bài bản"
+      }
+    },
+    "testimonials": {
+      "badge": "Khách hàng nói gì",
+      "title": "Phản hồi từ khách hàng",
+      "customer1": {
+        "name": "Nguyễn Thị Lan",
+        "comment": "Dịch vụ tuyệt vời! Thợ nail rất chuyên nghiệp và nail art đẹp lắm. Sẽ quay lại lần sau."
+      },
+      "customer2": {
+        "name": "Trần Minh Anh",
+        "comment": "Mình đã thử nhiều salon nhưng Nailism là tốt nhất. Gel nail bền và đẹp, giá cả hợp lý."
+      },
+      "customer3": {
+        "name": "Lê Thị Hoa",
+        "comment": "Không gian salon sạch sẽ, thợ nail thân thiện. Mình rất hài lòng với dịch vụ ở đây."
+      },
+      "customerLabel": "Khách hàng"
+    },
+    "cta": {
+      "title": "Sẵn sàng làm đẹp móng tay?",
+      "description": "Đặt lịch ngay hôm nay để trải nghiệm dịch vụ nail chuyên nghiệp tại Nailism",
+      "bookingBtn": "Đặt lịch ngay",
+      "callBtn": "Gọi ngay"
+    },
+    "contact": {
+      "address": "Địa chỉ",
+      "addressValue": "123 Đường ABC, Quận 1, TP.HCM",
+      "phone": "Điện thoại",
+      "phoneValue": "(028) 1234 5678",
+      "email": "Email",
+      "emailValue": "info@nailism.com"
+    }
+  },
+  "footer": {
+    "companyName": "Nailism",
+    "description": "Chuyên nghiệp trong việc chăm sóc và làm đẹp móng tay, móng chân với đội ngũ thợ nail giàu kinh nghiệm.",
+    "quickLinks": "Liên kết nhanh",
+    "services": "Dịch vụ",
+    "contact": "Liên hệ",
+    "home": "Trang chủ",
+    "servicesLink": "Dịch vụ",
+    "booking": "Đặt lịch",
+    "about": "Giới thiệu",
+    "nailArt": "Nail Art",
+    "gelNail": "Gel Nail",
+    "nailCare": "Chăm sóc móng",
+    "nailSpa": "Spa móng",
+    "address": "123 Đường ABC, Quận 1, TP.HCM",
+    "phone": "(028) 1234 5678",
+    "email": "info@nailism.com",
+    "copyright": "© 2024 Nailism. Tất cả quyền được bảo lưu.",
+    "privacy": "Chính sách bảo mật",
+    "terms": "Điều khoản sử dụng"
+  }
+}

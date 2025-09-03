@@ -1,0 +1,129 @@
+{
+  "navbar": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "contactBtn": "Contact",
+    "bookingBtn": "Book Now"
+  },
+  "homepage": {
+    "hero": {
+      "badge": "✨ Professional Nail Salon",
+      "title": "Professional Nail",
+      "titleHighlight": "Beauty Services",
+      "description": "Experience premium nail services with our professional nail technicians. From creative nail art to comprehensive nail care.",
+      "bookingBtn": "Book Now",
+      "contactBtn": "Contact",
+      "rating": "4.9/5 (200+ reviews)",
+      "customers": "500+ customers",
+      "quickBooking": {
+        "title": "Quick Booking",
+        "subtitle": "Choose service and suitable time",
+        "selectDate": "Select Date",
+        "selectTime": "Select Time",
+        "bookNow": "Book Now"
+      }
+    },
+    "services": {
+      "badge": "Our Services",
+      "title": "Professional Nail Services",
+      "description": "From creative nail art to comprehensive nail care, we bring you the best services",
+      "nailArt": {
+        "title": "Nail Art",
+        "description": "Unique and creative nail art designs in modern style",
+        "price": "$10",
+        "duration": "60 min"
+      },
+      "gelNail": {
+        "title": "Gel Nail",
+        "description": "Long-lasting gel nails that won't chip or peel",
+        "price": "$15",
+        "duration": "90 min"
+      },
+      "nailCare": {
+        "title": "Nail Care",
+        "description": "Professional nail care service, safe and effective",
+        "price": "$8",
+        "duration": "45 min"
+      },
+      "nailSpa": {
+        "title": "Nail Spa",
+        "description": "Premium nail spa experience with relaxing massage",
+        "price": "$20",
+        "duration": "120 min"
+      },
+      "price": "Price:",
+      "duration": "Duration:",
+      "bookBtn": "Book"
+    },
+    "features": {
+      "badge": "Why Choose Us",
+      "title": "Quality Service Commitment",
+      "safety": {
+        "title": "Absolute Safety",
+        "description": "Using sterilized tools, ensuring customer safety"
+      },
+      "timeSaving": {
+        "title": "Time Saving",
+        "description": "Online booking, no waiting, saving precious time"
+      },
+      "professional": {
+        "title": "Professional Technicians",
+        "description": "Experienced nail technicians with professional training"
+      }
+    },
+    "testimonials": {
+      "badge": "What Customers Say",
+      "title": "Customer Reviews",
+      "customer1": {
+        "name": "Sarah Johnson",
+        "comment": "Excellent service! The nail technician is very professional and the nail art is beautiful. Will come back next time."
+      },
+      "customer2": {
+        "name": "Emily Chen",
+        "comment": "I've tried many salons but Nailism is the best. The gel nails are durable and beautiful, reasonable price."
+      },
+      "customer3": {
+        "name": "Maria Rodriguez",
+        "comment": "Clean salon space, friendly nail technicians. I'm very satisfied with the service here."
+      },
+      "customerLabel": "Customer"
+    },
+    "cta": {
+      "title": "Ready to beautify your nails?",
+      "description": "Book today to experience professional nail services at Nailism",
+      "bookingBtn": "Book Now",
+      "callBtn": "Call Now"
+    },
+    "contact": {
+      "address": "Address",
+      "addressValue": "123 ABC Street, District 1, HCMC",
+      "phone": "Phone",
+      "phoneValue": "(028) 1234 5678",
+      "email": "Email",
+      "emailValue": "info@nailism.com"
+    }
+  },
+  "footer": {
+    "companyName": "Nailism",
+    "description": "Professional in nail care and beauty with experienced nail technicians.",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "contact": "Contact",
+    "home": "Home",
+    "servicesLink": "Services",
+    "booking": "Booking",
+    "about": "About",
+    "nailArt": "Nail Art",
+    "gelNail": "Gel Nail",
+    "nailCare": "Nail Care",
+    "nailSpa": "Nail Spa",
+    "address": "123 ABC Street, District 1, HCMC",
+    "phone": "(028) 1234 5678",
+    "email": "info@nailism.com",
+    "copyright": "© 2024 Nailism. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  }
+}
