@@ -2,144 +2,246 @@
 alwaysApply: true
 ---
 
-# Frontend Project Development Rules
+# Nailism Booking Project Rules
 
-## 1. Technologies and Libraries
+## 1. Project Overview
 
-- **Framework**: Use React with Vite as the build tool
-- **UI Component**: Use shadcn/ui as the primary UI component library
-- **Icon**: Use only Lucid Icon for all icons in the project. Do not use third-party icon libraries
-- **State Management/Data Fetching**: Use TanStack Query for managing asynchronous data (API calls, caching, etc.)
+**Nailism Booking** là ứng dụng đặt lịch nail salon chuyên nghiệp với hỗ trợ đa ngôn ngữ (tiếng Việt/tiếng Anh).
 
-## 2. Color Rules
+### Tech Stack
+- **Framework**: React 18+ với TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Internationalization**: react-i18next
+- **Routing**: React Router v6
+- **Icons**: Lucide React (ONLY)
 
-Always use color variables defined in Tailwind CSS from shadcn/ui:
+## 2. UI/UX Guidelines
 
-### Background Colors
+### shadcn/ui Usage
+- **ALWAYS** use shadcn/ui components instead of custom components
+- **NEVER** create custom UI components that already exist in shadcn/ui
+- Import from `@/components/ui/` path
+- Follow shadcn/ui design patterns
 
+### Color System (MANDATORY)
+**ONLY** use Tailwind CSS color variables from shadcn/ui:
+
+#### Background Colors
 - `bg-background`
 - `bg-muted`
 - `bg-card`
 
-### Primary Colors
-
+#### Primary Colors
 - `bg-primary`
 - `text-primary`
 - `border-primary`
 
-### Secondary Colors
-
+#### Secondary Colors
 - `bg-secondary`
 - `text-secondary`
 
-### Accent Colors
-
+#### Accent Colors
 - `bg-accent`
 - `text-accent`
 
-### ⚠️ Color Restrictions
+#### ⚠️ Color Restrictions
+- **PROHIBITED**: Hard-coded colors (`#ffffff`, `rgb(0,0,0)`, etc.)
+- **PROHIBITED**: Color gradients (keep design simple)
+- **REQUIRED**: Use CSS variables for theme consistency
 
-- **Do not** use hard-coded colors like `#ffffff`, `rgb(0,0,0)`, etc. in the codebase
-- **Prohibit** the use of color gradients in any case to ensure consistency and simplicity
-- Ensure adherence to color variables for consistency and ease of theme switching (if needed)
-
-## 3. Icon Rules
-
-- Use **only Lucid Icon** for all icons in the interface
-- Adjust icon sizes based on context:
-  - `w-4 h-4` for inline text
-  - `w-6 h-6` for buttons
-- Icon colors must follow Tailwind CSS variables from shadcn/ui:
-  - `text-primary`
-  - `text-muted-foreground`
-- Ensure icons are meaningful and avoid overuse or unnecessary icons
-
-## 4. UI Design Rules
+### Icon Rules
+- **ONLY** use Lucide React icons
+- Import from `lucide-react`
+- Sizes: `w-4 h-4` (inline), `w-6 h-6` (buttons)
+- Colors: `text-primary`, `text-muted-foreground`
 
 ### Design Principles
+- **Elegant**: Clean interface, no excessive effects
+- **Creative**: Unique combinations while maintaining consistency
+- **Balanced**: Harmonious spacing with Tailwind values (`p-4`, `m-2`, `gap-4`)
+- **Simple**: Minimalism, remove unnecessary elements
 
-- **Elegant**: The interface must be clean, avoiding excessive effects or cluttered details
-- **Creative**: Combine UI elements (buttons, cards, badges, etc.) uniquely while maintaining consistency
-- **Balanced**: Ensure harmonious spacing, sizing, and proportions between elements. Use Tailwind CSS spacing values (`p-4`, `m-2`, `gap-4`)
-- **Simple**: Prioritize minimalism, removing unnecessary elements to enhance user experience
+## 3. Internationalization (i18n) Rules
 
-### Harmonious Coordination
-
-- **Colors**: Combine shadcn/ui color variables for good contrast
-  - Example: `bg-primary` with `text-primary-foreground`
-- **Icons**: Use icons for visual support, such as in buttons, badges, or menus
-- **Badges**: Use badges to highlight status or important information
-  - Example: `badge bg-success` for completed status
-
-## 5. TanStack Query Rules
-
-- Use TanStack Query to manage **all API requests** (GET, POST, PUT, DELETE, etc.)
-- Leverage TanStack Query features:
-  - Caching
-  - Refetching
-  - Optimistic updates to optimize performance
-
-### Query Keys Structure
-
-Use clear, structured query keys:
-
-```typescript
-['users', userId]
-['posts', { page, limit }]
+### Translation Structure
+```json
+{
+  "navbar": {
+    "home": "Trang chủ",
+    "services": "Dịch vụ"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Làm đẹp móng tay",
+      "description": "..."
+    }
+  }
+}
 ```
 
-### Error and Loading States
+### i18n Implementation
+- **ALWAYS** use `useTranslation()` hook for text content
+- **NEVER** hard-code text strings in components
+- Use nested keys: `homepage.hero.title`
+- Provide translations for both `vi` and `en`
+- Use semantic key names (not generic like `text1`)
 
-Handle loading and error states visually using shadcn/ui components:
+### Language Switching
+- Use `useLanguage()` hook for language management
+- Implement smooth transitions with CSS classes
+- Show loading state during language changes
+- Prevent layout shift with `prevent-layout-shift` class
 
-- **Skeleton** for loading states
-- **Alert** for error states
+## 4. Code Standards
 
-## 6. Code Rules
+### TypeScript (MANDATORY)
+- **REQUIRED**: Use TypeScript for all components
+- Define proper interfaces for props and state
+- Use strict type checking
+- **PROHIBITED**: `any` type usage
 
 ### Component Structure
+```tsx
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/hooks/useLanguage';
 
-- Each component should be **small**, **reusable**, and follow the **Single Responsibility Principle**
+interface ComponentProps {
+  // Define props interface
+}
 
-### File Naming Conventions
+export function Component({ prop1, prop2 }: ComponentProps) {
+  const { t } = useTranslation();
+  const { isChangingLanguage } = useLanguage();
+  
+  return (
+    <div className="component-class">
+      {t('translation.key')}
+    </div>
+  );
+}
+```
 
-- **PascalCase** for component files
-  - Example: `ButtonPrimary.tsx`
-- **kebab-case** for other files
-  - Example: `api-client.ts`
+### File Naming
+- **Components**: PascalCase (`HomePage.tsx`, `NavBar.tsx`)
+- **Hooks**: camelCase with `use` prefix (`useLanguage.ts`)
+- **Utilities**: camelCase (`utils.ts`, `i18n.ts`)
 
-### Styling
+### Import Organization
+```tsx
+// 1. React imports
+import React, { useState, useEffect } from 'react';
 
-- Apply **Tailwind classes directly** in JSX/TSX
-- Avoid separate CSS unless absolutely necessary
+// 2. Third-party libraries
+import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
 
-### TypeScript
+// 3. Internal components
+import { Navbar } from '@/components/layout/NavBar';
+import { useLanguage } from '@/hooks/useLanguage';
 
-- **Mandatorily use TypeScript** for type safety
-- Define interfaces/types for:
-  - Props
-  - State
-  - API responses
+// 4. Types and utilities
+import { ComponentProps } from '@/types';
+import { cn } from '@/lib/utils';
+```
 
-### Code Quality
+## 5. Performance & UX Rules
 
-- Use **Prettier** and **ESLint** to ensure consistent code formatting
-- **File Preservation**: Do not delete or rewrite existing files without team approval or a clear review process
+### Loading States
+- **ALWAYS** implement loading states for async operations
+- Use `LoadingOverlay` component for language switching
+- Show progress indicators
+- Implement smooth transitions
 
-## 7. Language and Commit Rules
+### CSS Transitions
+- Use custom CSS classes for smooth transitions:
+  - `text-transition`: Smooth text transitions
+  - `layout-transition`: Layout stability
+  - `prevent-layout-shift`: Prevent layout jumps
+  - `fade-in`: Smooth content appearance
+
+### Responsive Design
+- **Mobile-first** approach
+- Breakpoints: Mobile (<768px), Tablet (768-1024px), Desktop (>1024px)
+- Test on real devices
+- Ensure touch-friendly interactions
+
+## 6. Nailism Business Rules
+
+### Content Guidelines
+- **Professional tone**: Friendly but professional
+- **Nail-specific terminology**: Use industry terms
+- **Clear booking flow**: Intuitive user journey
+- **Safety emphasis**: Highlight safety and quality
+- **Pricing**: VND for Vietnamese, USD for English
+
+### Features Priority
+1. **Booking System**: Core functionality
+2. **Service Display**: Nail services showcase
+3. **Language Switching**: Seamless vi/en toggle
+4. **Responsive Design**: Mobile-first approach
+5. **Loading States**: Smooth user experience
+
+## 7. Project Structure
+
+```
+src/
+├── components/
+│   ├── layout/           # Layout components
+│   ├── providers/        # Context providers
+│   └── ui/              # shadcn/ui components
+├── hooks/               # Custom React hooks
+├── lib/                 # Utilities and configurations
+├── locales/            # Translation files (vi/, en/)
+├── pages/              # Page components
+├── router/             # Routing configuration
+└── types/              # TypeScript definitions
+```
+
+## 8. Development Workflow
+
+### Before Starting
+1. Check existing shadcn/ui components
+2. Plan translation keys structure
+3. Consider responsive design
+4. Think about loading states
+
+### Code Review Checklist
+- [ ] Uses shadcn/ui components
+- [ ] Implements i18n properly
+- [ ] TypeScript types are correct
+- [ ] Responsive design works
+- [ ] Loading states are handled
+- [ ] No hard-coded colors
+- [ ] Uses Lucide icons only
+- [ ] Follows naming conventions
+
+## 9. Common Mistakes to Avoid
+
+1. **DON'T** create custom UI components when shadcn/ui exists
+2. **DON'T** hard-code text strings
+3. **DON'T** use hard-coded colors
+4. **DON'T** forget TypeScript types
+5. **DON'T** ignore responsive design
+6. **DON'T** skip loading states
+7. **DON'T** use non-Lucide icons
+8. **DON'T** forget i18n implementation
+
+## 10. Language and Commit Rules
 
 ### Communication Language
-
-- Use **Vietnamese** for all project-related discussions and documentation
+- Use **Vietnamese** for project discussions and documentation
 - **Exception**: Commit messages must be in English
 
 ### Commit Message Standards
-
-Use English following standard conventions:
-
 ```bash
-feat: add login functionality
-fix: resolve button alignment issue  
-chore: update dependencies
-docs: update project rules
+feat: add language switching functionality
+fix: resolve layout shift during i18n transition
+chore: update shadcn/ui components
+docs: update project rules for i18n
 ```
+
+---
+
+**Remember**: This is a professional nail salon booking system. Prioritize user experience, accessibility, and smooth interactions. Always test in both Vietnamese and English languages.
